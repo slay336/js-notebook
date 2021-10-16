@@ -12,7 +12,10 @@
             <v-btn color="yellow">
                 <v-icon>mdi-pencil</v-icon>
             </v-btn>
-            <v-btn color="red">
+            <v-btn 
+                color="red"
+                @click="deleteNote()"
+            >
                 <v-icon color="white">mdi-close</v-icon>
             </v-btn>         
         </v-card-actions>
@@ -26,6 +29,14 @@ export default {
     name: "NoteCard",
     props: {
         note: Object
+    },
+    methods: {
+        deleteNote() {
+            let newState = this.$root.notes.filter((el) => {
+                return el.id !== this.note.id;
+            })
+            this.$root.notes = newState;
+        }
     }
 }
 </script>
