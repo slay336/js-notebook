@@ -5,23 +5,9 @@
             persistent
             max-width="600px"
         >
-            <template v-slot:activator="{ on }">
-                <v-btn
-                    v-show="true"
-                    color="red"
-                    fab
-                    dark
-                    fixed
-                    bottom
-                    right
-                    v-on="on"
-                >
-                    <v-icon>mdi-plus</v-icon>    
-                </v-btn>
-            </template>
             <v-card>
                 <v-card-title>
-                    <span class="text-h5">Новая заметка</span>
+                    <span class="text-h5">Редактирование заметки</span>
                 </v-card-title>
                 <v-card-text>
                     <v-row>
@@ -72,7 +58,14 @@ export default {
     name: "AlterNote",
     data() {
         return {
+            noteId: undefined,
             dialog: false
+        }
+    },
+    methods: {
+        open(noteId) {
+            this.noteId = noteId;
+            this.dialog = true;
         }
     }
 }

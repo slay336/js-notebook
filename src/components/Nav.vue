@@ -7,9 +7,9 @@
         <v-app-bar-nav-icon>
             <v-icon>mdi-notebook-check</v-icon>
         </v-app-bar-nav-icon>
-        <v-app-bar-title color="black">
+        <v-toolbar-title>
             Notebook
-        </v-app-bar-title>
+        </v-toolbar-title>
     </v-app-bar>
 </template>
 

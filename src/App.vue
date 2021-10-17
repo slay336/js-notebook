@@ -12,11 +12,6 @@ import NavBar from "@/components/Nav.vue";
 
 export default {
   name: 'App',
-
-  data: () => ({
-  
-  }),
-
   components: {
     NavBar
   }

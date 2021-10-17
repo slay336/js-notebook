@@ -15,19 +15,35 @@
                 ></NoteCard>
             </v-col>
         </v-row>
-        <AlterNote></AlterNote>
+        <v-btn
+            v-show="true"
+            color="red"
+            fab
+            dark
+            fixed
+            bottom
+            right
+            @click="callDialog(undefined)"
+        >
+            <v-icon>mdi-plus</v-icon>    
+        </v-btn>
+        <AlterNote ref="dialog"></AlterNote>
     </v-container>
 </template>
 
 <script>
 import NoteCard from "@/components/NoteCard.vue";
 import AlterNote from "@/components/AlterNote.vue";
+import {callDialog} from "@/shared.js";
 
 export default {
     name: "Notes",
     components: {
         NoteCard,
         AlterNote
+    },
+    methods: {
+        callDialog
     }
 }
 
