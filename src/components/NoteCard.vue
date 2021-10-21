@@ -48,10 +48,9 @@ export default {
     methods: {
         callDialog,
         deleteNote() {
-            let newState = this.$root.notes.filter((el) => {
+            this.$notes = this.$notes.filter((el) => {
                 return el.id !== this.note.id;
             })
-            this.$root.notes = newState;
         }
 
     },

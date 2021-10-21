@@ -2,7 +2,7 @@
     <v-container>
         <v-row>
             <v-col
-                v-for="note in $root.notes"
+                v-for="note in $notes"
                 :key="note.id" 
                 :cols="12"
                 :sm="6"
@@ -44,6 +44,9 @@ export default {
     },
     methods: {
         callDialog
+    },
+    beforeCreate() {
+
     }
 }
 
