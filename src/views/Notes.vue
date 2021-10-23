@@ -23,7 +23,7 @@
             fixed
             bottom
             right
-            @click="callDialog(undefined)"
+            @click="callDialog($refs.dialog, undefined)"
         >
             <v-icon>mdi-plus</v-icon>    
         </v-btn>
@@ -34,7 +34,6 @@
 <script>
 import NoteCard from "@/components/NoteCard.vue";
 import AlterNote from "@/components/AlterNote.vue";
-import {callDialog} from "@/shared.js";
 
 export default {
     name: "Notes",
@@ -42,11 +41,11 @@ export default {
         NoteCard,
         AlterNote
     },
-    methods: {
-        callDialog
-    },
     beforeCreate() {
-
+        this.$http.get("http://localhost:5001/notes")
+            .then((res) => {
+                this.$notes = res.data;
+            })
     }
 }
 

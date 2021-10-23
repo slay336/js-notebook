@@ -17,7 +17,7 @@
                 >            
                     <v-btn 
                         color="yellow"
-                        @click="callDialog(note.id)"
+                        @click="callDialog($refs.dialog, note.id)"
                     >
                         <v-icon>mdi-pencil</v-icon>
                     </v-btn>
@@ -38,7 +38,6 @@
 
 <script>
 import AlterNote from "@/components/AlterNote.vue";
-import {callDialog} from "@/shared.js";
 
 export default {
     name: "NoteCard",
@@ -46,13 +45,11 @@ export default {
         note: Object
     },
     methods: {
-        callDialog,
         deleteNote() {
             this.$notes = this.$notes.filter((el) => {
                 return el.id !== this.note.id;
             })
         }
-
     },
     components: {
         AlterNote
