@@ -42,7 +42,7 @@ export default {
         AlterNote
     },
     beforeCreate() {
-        this.$http.get("http://localhost:5001/notes")
+        this.$http.get("http://192.168.1.76:5001/notes")
             .then((res) => {
                 this.$notes = res.data;
             })
