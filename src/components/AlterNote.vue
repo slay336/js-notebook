@@ -17,11 +17,13 @@
                             <v-text-field
                                 label="Заголовок"
                                 name="note-title"
+                                v-model="noteTitle"
                                 required
                             ></v-text-field>
                             <v-textarea
                                 label="Текст заметки"
                                 name="note-text"
+                                v-model="noteDescription"
                                 required
                             ></v-textarea>
                         </v-col>
@@ -33,7 +35,7 @@
                     <v-btn
                         color="green darken-1"                        
                         dark
-                        @click="dialog = false"
+                        @click="saveAction()"
                     >
                         Сохранить
                         <v-icon>mdi-check</v-icon>
@@ -59,13 +61,33 @@ export default {
     data() {
         return {
             noteId: undefined,
-            dialog: false
+            dialog: false,
+            noteTitle: "",
+            noteDescription: ""
         }
     },
     methods: {
         open(noteId) {
             this.noteId = noteId;
+            if (noteId === undefined) {
+                this.noteTitle = "";
+                this.noteDescription = "";
+            }
             this.dialog = true;
+        },
+        saveAction() {
+            this.dialog = false;
+            if (this.noteId === undefined) {
+                this.$http.post("http://localhost:5001/add", {
+                    title: this.noteTitle,
+                    description: this.noteDescription
+                })
+                    .then(response => {
+                        this.$notes = response.data;
+                    })
+            } else {
+                alert("Not implemented");
+            }
         }
     }
 }

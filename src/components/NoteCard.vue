@@ -17,7 +17,7 @@
                 >            
                     <v-btn 
                         color="yellow"
-                        @click="callDialog($refs.dialog, note.id)"
+                        @click="callDialog($refs.dialog, note._id)"
                     >
                         <v-icon>mdi-pencil</v-icon>
                     </v-btn>

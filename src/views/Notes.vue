@@ -27,7 +27,9 @@
         >
             <v-icon>mdi-plus</v-icon>    
         </v-btn>
-        <AlterNote ref="dialog"></AlterNote>
+        <AlterNote
+            ref="dialog"
+        ></AlterNote>
     </v-container>
 </template>
 

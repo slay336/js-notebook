@@ -24,6 +24,11 @@ app.post("/delete", async (req, res) => {
     const result = await db.getNotes();
     console.log(result);
     return res.send(result);
-})
+});
+
+app.post("/add", async (req, res) => {
+   await db.addNote(req.body.title, req.body.description);
+   return res.send(await db.getNotes());
+});
 
 app.listen(5001);
