@@ -46,9 +46,12 @@ export default {
     },
     methods: {
         deleteNote() {
-            this.$notes = this.$notes.filter((el) => {
-                return el.id !== this.note.id;
+            this.$http.post("http://localhost:5001/delete", {
+                id: this.note._id
             })
+            .then(response => {
+                this.$notes = response.data;
+            });
         }
     },
     components: {

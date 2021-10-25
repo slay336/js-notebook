@@ -1,9 +1,8 @@
+const {ObjectId} = require("mongodb");
 const MongoClient = require("mongodb").MongoClient;
 
-const mongoClient = new MongoClient("mongodb://localhost:27017/");
-
 async function getNotes() {
-    await mongoClient.connect();
+    const mongoClient = await new MongoClient("mongodb://localhost:27017/").connect();
     const cursor = await mongoClient.db("js_notebook")
                             .collection("notes")
                             .find();
@@ -11,7 +10,7 @@ async function getNotes() {
     return await new Promise((resolve, reject) => {
         cursor.toArray((err, results) => {
             if (err) {
-                reject("Something went wrong while getting results")
+                reject(err)
             }
             resolve(results);
         })
@@ -22,10 +21,22 @@ async function getNotes() {
             return [];
         })
         .finally(() => {
-            mongoClient.close()
+            mongoClient.close();
+        });
+}
+
+async function deleteNote(noteId) {
+    const mongoClient = await new MongoClient("mongodb://localhost:27017/").connect();
+    mongoClient.db("js_notebook").collection("notes").deleteOne({ _id: new ObjectId(noteId) })
+        .catch(reject => {
+           console.log(reject)
+        })
+        .finally(() => {
+            mongoClient.close();
         });
 }
 
 module.exports = {
-    getNotes
+    getNotes,
+    deleteNote
 }
