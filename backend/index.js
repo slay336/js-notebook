@@ -31,4 +31,9 @@ app.post("/add", async (req, res) => {
    return res.send(await db.getNotes());
 });
 
+app.post("/alter", async (req, res) => {
+    await db.alterNote(req.body.id, req.body.title, req.body.description);
+    return res.send(await db.getNotes());
+});
+
 app.listen(5001);

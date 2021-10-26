@@ -38,16 +38,39 @@ async function deleteNote(noteId) {
 
 async function addNote(title, description) {
     const mongoClient = await new MongoClient("mongodb://localhost:27017/").connect();
-    const result = await mongoClient.db("js_notebook").collection("notes").insertOne({
+    mongoClient.db("js_notebook").collection("notes").insertOne({
         title,
         description
-    });
-    await mongoClient.close();
-    return result;
+    })
+        .catch(reject => {
+            console.log(reject)
+        })
+        .finally(() => {
+            mongoClient.close();
+        });
+}
+
+async function alterNote(id, title, description) {
+    const mongoClient = await new MongoClient("mongodb://localhost:27017/").connect();
+    mongoClient.db("js_notebook").collection("notes")
+        .updateOne({ _id: ObjectId(id)},
+            {
+                $set: {
+                    title,
+                    description
+                }
+            })
+        .catch(reject => {
+            console.log(reject);
+        })
+        .finally(() => {
+            mongoClient.close();
+        });
 }
 
 module.exports = {
     getNotes,
     deleteNote,
-    addNote
+    addNote,
+    alterNote
 }
