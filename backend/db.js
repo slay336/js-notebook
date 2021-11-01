@@ -1,8 +1,10 @@
 const {ObjectId} = require("mongodb");
 const MongoClient = require("mongodb").MongoClient;
 
+const dbURI = `mongodb://localhost:${process.env.MONGO_PORT || 27017}`;
+
 async function getNotes() {
-    const mongoClient = await new MongoClient("mongodb://localhost:27017/").connect();
+    const mongoClient = await new MongoClient(dbURI).connect();
     const cursor = await mongoClient.db("js_notebook")
                             .collection("notes")
                             .find();
@@ -26,7 +28,7 @@ async function getNotes() {
 }
 
 async function deleteNote(noteId) {
-    const mongoClient = await new MongoClient("mongodb://localhost:27017/").connect();
+    const mongoClient = await new MongoClient(dbURI).connect();
     mongoClient.db("js_notebook").collection("notes").deleteOne({ _id: new ObjectId(noteId) })
         .catch(reject => {
            console.log(reject)
@@ -37,7 +39,7 @@ async function deleteNote(noteId) {
 }
 
 async function addNote(title, description) {
-    const mongoClient = await new MongoClient("mongodb://localhost:27017/").connect();
+    const mongoClient = await new MongoClient(dbURI).connect();
     mongoClient.db("js_notebook").collection("notes").insertOne({
         title,
         description
@@ -51,7 +53,7 @@ async function addNote(title, description) {
 }
 
 async function alterNote(id, title, description) {
-    const mongoClient = await new MongoClient("mongodb://localhost:27017/").connect();
+    const mongoClient = await new MongoClient(dbURI).connect();
     mongoClient.db("js_notebook").collection("notes")
         .updateOne({ _id: ObjectId(id)},
             {

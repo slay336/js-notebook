@@ -101,7 +101,7 @@ export default {
 
             this.dialog = false;
             if (this.noteId === undefined) {
-                this.$http.post("http://localhost:5001/add", {
+                this.$http.post(`${this.serverUrl}/add`, {
                     title: this.noteTitle,
                     description: this.noteDescription
                 })
@@ -109,7 +109,7 @@ export default {
                         this.$notes = response.data;
                     });
             } else {
-                this.$http.post("http://localhost:5001/alter", {
+                this.$http.post(`${this.serverUrl}/alter`, {
                     id: this.noteId,
                     title: this.noteTitle,
                     description: this.noteDescription

@@ -22,6 +22,12 @@ Vue.mixin({
             set(newNotesState) {
                 globalData.$data.$notes = newNotesState;
             }
+        },
+        serverUrl: {
+            get() {
+                return `${process.env.VUE_APP_USE_HTTPS === "true" ? "https" : "http"}://` +
+                       `${process.env.VUE_APP_SERVER_HOST}:${process.env.VUE_APP_SERVER_PORT}`;
+            }
         }
     },
     methods: {
