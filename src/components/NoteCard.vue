@@ -46,7 +46,7 @@ export default {
     },
     methods: {
         deleteNote() {
-            this.$http.post("http://localhost:5001/delete", {
+            this.$http.post(`${this.serverUrl}/delete`, {
                 id: this.note._id
             })
             .then(response => {

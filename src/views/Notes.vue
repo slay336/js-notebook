@@ -43,8 +43,8 @@ export default {
         NoteCard,
         AlterNote
     },
-    beforeCreate() {
-        this.$http.get("http://localhost:5001/notes")
+    mounted() {
+        this.$http.get(`${this.serverUrl}/notes`)
             .then((res) => {
                 this.$notes = res.data;
             })
