@@ -2,6 +2,8 @@ require("dotenv").config()
 const express = require("express");
 const db = require("./db.js");
 const path = require("path");
+const https = require("https");
+const fs = require("fs");
 const app = express();
 
 const PORT = process.env.EXPRESS_PORT || 80;
@@ -40,6 +42,7 @@ app.post("/alter", async (req, res) => {
     return res.send(await db.getNotes());
 });
 
-app.listen(PORT, () => {
-    console.log("Server running on port " + PORT);
-});
+https.createServer({
+    key: fs.readFileSync(`${process.env.CERT_FOLDER}/server.key`).toString(),
+    cert: fs.readFileSync(`${process.env.CERT_FOLDER}/server.cert`).toString()
+}, app).listen(PORT)
